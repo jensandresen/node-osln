@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/jensandresen/node-osln/issues"
   },
-  "homepage": "https://github.com/jensandresen/node-osln#readme"
+  "homepage": "https://github.com/jensandresen/node-osln#readme",
+  "dependencies": {
+    "node-dir": "^0.1.17"
+  }
 }
