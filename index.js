@@ -1,12 +1,13 @@
 const dir = require('node-dir');
 const readline = require('readline');
 const open = require("open");
+const leftPad = require("left-pad");
 
 const sourceDir = process.cwd();
 
 dir.promiseFiles(sourceDir)
     .then(files => {
-        return files.filter(name => name.match(/\.txt$/))
+        return files.filter(name => name.match(/\.sln$/))
     })
     .then(solutionFiles => {
         if (solutionFiles.length === 0) {
@@ -26,11 +27,11 @@ dir.promiseFiles(sourceDir)
         console.log("");
 
         for(let i = 0; i < solutionFiles.length; i++) {
-            const option = solutionFiles[i];
-            console.log(`  ${i+1}: ${option}`);
+            const option = solutionFiles[i].slice(sourceDir.length+1);
+            console.log(`${leftPad(i+1, 5)}: ${option}`);
         }
 
-        console.log("");
+        console.log("\n");
 
         const rl = readline.createInterface({
             input: process.stdin,
