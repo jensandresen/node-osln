@@ -2,7 +2,7 @@ const dir = require('node-dir');
 const readline = require('readline');
 const open = require("open");
 
-const sourceDir = __dirname;
+const sourceDir = process.cwd();
 
 dir.promiseFiles(sourceDir)
     .then(files => {
