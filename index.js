@@ -45,7 +45,7 @@ dir.promiseFiles(sourceDir)
                 console.log(`Opening "${selected}"...`);
                 open(selected);
             } else {
-                console.log(`Error, unrecognized value of "${answer}". The options was 1-${solutionFiles.length}.`);
+                console.log(`Error, unrecognized value of "${answer}". The value should have been between 1-${solutionFiles.length}.`);
             }
 
             rl.close();
