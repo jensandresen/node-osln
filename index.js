@@ -14,6 +14,13 @@ dir.promiseFiles(sourceDir)
             return;
         }
 
+        if (solutionFiles.length === 1) {
+            const selected = solutionFiles[0];
+            console.log(`Opening "${selected}"...`);
+            open(selected);
+            return;
+        }
+
         console.log("");
         console.log("Multiple solution files found...")
         console.log("");
