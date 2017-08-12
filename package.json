@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/jensandresen/node-osln#readme",
   "dependencies": {
-    "node-dir": "^0.1.17"
+    "node-dir": "^0.1.17",
+    "open": "0.0.5"
   }
 }
