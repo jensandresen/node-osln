@@ -1,6 +1,6 @@
 {
   "name": "osln",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A small command line utility to open .sln files",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
