@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const dir = require('node-dir');
 const readline = require('readline');
 const open = require("open");
