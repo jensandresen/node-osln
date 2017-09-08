@@ -3,6 +3,7 @@ const readline = require('readline');
 const open = require("open");
 const leftPad = require("left-pad");
 const minimist = require("minimist");
+const path = require("path");
 
 const sourceDir = process.cwd();
 
@@ -14,7 +15,10 @@ module.exports = {
         })
         .then(solutionFiles => {
             if (commandArgs.filter) {
-                return solutionFiles.filter(fileName => fileName.match(`^.*?(${commandArgs.filter}).*?\.sln$`));
+                return solutionFiles.filter(filePath => {
+                    const fileName = path.basename(filePath, ".sln");
+                    return fileName.match(commandArgs.filter);
+                });
             }
     
             return solutionFiles;
