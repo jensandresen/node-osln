@@ -1,10 +1,11 @@
+const settings = require("./../utils/settings.js");
+
 module.exports = {
 
     execute: function(commandName, commandArgs) {
-        const info = require("./../package.json");
-        const localVersion = info.version;
+        const localVersion = settings.getVersion();
 
-        console.log(`Local version: ${info.version}`);
+        console.log(`Local version: ${localVersion}`);
 
         if (commandArgs.check) {
             const http = require("https");
@@ -26,7 +27,7 @@ module.exports = {
                     if (localVersion === onlineVersion) {
                         console.log("Up to date - you have the latest version!");
                     } else {
-                        console.log("A newer version is available online. Make sure to update by typing \"npm update -g osln\".");
+                        console.log(`A newer version is available online. Make sure to update by typing "npm update -g ${settings.getName()}".`);
                     }
 
                 });
@@ -36,7 +37,7 @@ module.exports = {
     getHelp: function () {
         return {
             name: "version",
-            description: "Show information about you version of osln.",
+            description: `Show information about you version of ${settings.getName()}.`,
             args: [
                 {
                     short: "",

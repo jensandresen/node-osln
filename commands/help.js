@@ -1,3 +1,4 @@
+const settings = require("./../utils/settings.js");
 const rightPad = require("right-pad");
 const indendBaseline = "  ";
 
@@ -38,13 +39,13 @@ module.exports = {
             usages: [
                 "help [command]",
             ],
-            example: "osln help version",
-            footer: `For a list of available commands type "osln help".`
+            example: `${settings.getName()} help version`,
+            footer: `For a list of available commands type "${settings.getName()} help".`
         };
     },
     printAll: function(helpMessages) {
         console.log(`Usage:`);
-        console.log(`${indendBaseline}osln <command> [<args>]`);
+        console.log(`${indendBaseline}${settings.getName()} <command> [<args>]`);
         console.log("");
 
         console.log("Available commands:");
@@ -62,7 +63,7 @@ module.exports = {
         }
 
         console.log();
-        console.log("Type \"osln help <command>\" for help information for a specific command.");
+        console.log(`Type "${settings.getName()} help <command>" for help information for a specific command.`);
     },
     printSingle: function(command) {
         const hasArguments = command.args && command.args.length > 0;
@@ -73,7 +74,7 @@ module.exports = {
             : [`${command.name}${hasArguments ? " [<args>]" : ""}`];
 
         usages.forEach(usage => {
-            console.log(`${indendBaseline}osln ${usage}`);
+            console.log(`${indendBaseline}${settings.getName()} ${usage}`);
         });
 
         console.log();

@@ -1,3 +1,5 @@
+const settings = require("./../utils/settings.js");
+
 module.exports = function(commandName, commandArgs) {
     switch (commandName) {
         case "list":
@@ -23,6 +25,6 @@ module.exports = function(commandName, commandArgs) {
             break;
         default:
             console.log(`Unknown command "${commandName}"`);
-            console.log(`Try "osln help" for more information about available commands.`)
+            console.log(`Try "${settings.getName()} help" for more information about available commands.`)
     }
 };
