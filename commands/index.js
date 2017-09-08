@@ -8,13 +8,17 @@ module.exports = function(commandName, commandArgs) {
         case "help":
             const helper = require("./help.js");
 
-            helper.execute(
-                commandName, 
-                commandArgs, 
+            helper.execute(commandName, commandArgs, 
                 [
                     require("./list.js").getHelp(),
+                    require("./version.js").getHelp(),
                 ]
             );
+
+            break;
+        case "version":
+            const version = require("./version.js");
+            version.execute(commandName, commandArgs);
 
             break;
         default:
