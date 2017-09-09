@@ -39,7 +39,6 @@ module.exports = {
             usages: [
                 "help [command]",
             ],
-            example: `${settings.getName()} help version`,
             footer: `For a list of available commands type "${settings.getName()} help".`
         };
     },
@@ -80,12 +79,6 @@ module.exports = {
         console.log();
         console.log("Description:")
         console.log(`${indendBaseline}${command.description}`);
-
-        if (command.example) {
-            console.log();
-            console.log("Example:");
-            console.log(`${indendBaseline}${command.example}`);
-        }
 
         if (hasArguments) {
             console.log();
