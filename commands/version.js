@@ -37,7 +37,7 @@ module.exports = {
     getHelp: function () {
         return {
             name: "version",
-            description: `Show information about you version of ${settings.getName()}.`,
+            description: `Show information about your version of ${settings.getName()}.`,
             args: [
                 {
                     short: "",
