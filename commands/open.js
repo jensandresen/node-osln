@@ -83,7 +83,7 @@ module.exports = {
     getHelp: function() {
         return {
             name: "open",
-            description: "Scan and list all available files in current folder and subfolders. \nPrompts to select which to open.",
+            description: "Scan and list all available files in current folder and subfolders.",
             args: [
                 {
                     short: "f",
