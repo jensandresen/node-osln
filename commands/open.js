@@ -13,16 +13,16 @@ module.exports = {
         .then(files => {
             return files.filter(fileName => fileName.match(/\.sln$/));
         })
-//        .then(solutionFiles => {
-//            if (commandArgs.filter) {
-//                return solutionFiles.filter(filePath => {
-//                    const fileName = path.basename(filePath, ".sln");
-//                    return fileName.match(commandArgs.filter);
-//                });
-//            }
-//    
-//            return solutionFiles;
-//        })
+        .then(solutionFiles => {
+            if (commandArgs.filter) {
+                return solutionFiles.filter(filePath => {
+                    const fileName = path.basename(filePath, ".sln");
+                    return fileName.match(commandArgs.filter);
+                });
+            }
+    
+            return solutionFiles;
+        })
         .then(solutionFiles => {
             return new Promise((resolve, reject) => {
                 if (solutionFiles.length === 0) {
@@ -33,6 +33,13 @@ module.exports = {
             });
         })
         .then(solutionFiles => {
+
+            if (solutionFiles.length === 1) {
+                return new Promise(resolve => {
+                    resolve(solutionFiles[0]);
+                });
+            }
+
             console.log("");
             console.log("Multiple solution files found...")
             console.log("");
