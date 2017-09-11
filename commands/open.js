@@ -73,7 +73,7 @@ module.exports = {
         })
         .then(selected => {
             console.log(`Opening "${selected}"...`);
-            //open(selected);
+            open(selected);
             return;
         })
         .catch(err => {
