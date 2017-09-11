@@ -9,8 +9,12 @@ const commandProcessor = require("./commands");
 
 const args = process.argv.splice(2);
 
-const commandName = args[0];
-const commandArgs = minimist(args.slice(1));
+let commandName = args[0];
 
+if (!commandName) {
+    commandName = "open";
+}
+
+const commandArgs = minimist(args.slice(1));
 
 commandProcessor(commandName, commandArgs);
