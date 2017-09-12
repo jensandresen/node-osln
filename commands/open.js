@@ -14,7 +14,7 @@ module.exports = {
             return files.filter(fileName => fileName.match(/\.sln$/));
         })
         .then(solutionFiles => {
-            if (commandArgs.filter) {
+            if (commandArgs.f || commandArgs.filter) {
                 return solutionFiles.filter(filePath => {
                     const fileName = path.basename(filePath, ".sln");
                     return fileName.match(commandArgs.filter);
