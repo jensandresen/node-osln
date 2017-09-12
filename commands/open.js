@@ -72,8 +72,13 @@ module.exports = {
             });
         })
         .then(selected => {
-            console.log(`Opening "${selected}"...`);
-            open(selected);
+            if (commandArgs["dry-run"]) {
+                console.log(`Would open this file: ${selected}`);
+            } else {
+                console.log(`Opening "${selected}"...`);
+                open(selected);
+            }
+
             return;
         })
         .catch(err => {
@@ -89,6 +94,10 @@ module.exports = {
                     short: "f",
                     long: "filter",
                     description: "Apply a RegEx filter on the file name (without extension)."
+                },
+                {
+                    long: "dry-run",
+                    description: "Will not actually open the file, only print which would be opened."
                 }
             ]
         };
