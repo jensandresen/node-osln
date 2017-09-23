@@ -4,7 +4,7 @@ const open = require("open");
 const leftPad = require("left-pad");
 const minimist = require("minimist");
 const path = require("path");
-var unique = require('array-unique');
+const unique = require('array-unique');
 
 const sourceDir = process.cwd();
 
