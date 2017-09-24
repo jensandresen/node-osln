@@ -4,15 +4,24 @@ const open = require("open");
 const leftPad = require("left-pad");
 const minimist = require("minimist");
 const path = require("path");
+const unique = require('array-unique');
 
 const sourceDir = process.cwd();
 
 module.exports = {
     execute: function(commandName, commandArgs) {
-        dir.promiseFiles(sourceDir)
-        .then(files => {
-            return files.filter(fileName => fileName.match(/\.sln$/));
-        })
+        let paths = commandArgs["_"];
+
+        if (!paths || paths.length == 0) {
+            paths = [sourceDir];
+        }
+
+        Promise.all(paths.map(p => dir.promiseFiles(p)))
+        .then(fileLists => [].concat.apply([], fileLists))
+        .then(files => files.filter(fileName => fileName.match(/\.sln$/)))
+        .then(files => files.map(file => path.resolve(file)))
+        .then(files => unique(files))
+        .then(files => files.sort())
         .then(solutionFiles => {
             if (commandArgs.f || commandArgs.filter) {
                 return solutionFiles.filter(filePath => {
@@ -45,8 +54,8 @@ module.exports = {
             console.log("");
 
             for(let i = 0; i < solutionFiles.length; i++) {
-                const option = solutionFiles[i].slice(sourceDir.length+1);
-                console.log(`${leftPad(i+1, 5)}: ${option}`);
+                const option = path.relative(process.cwd(), solutionFiles[i]).replace(/^..(\/|\\)/, '');
+                console.log(`${leftPad(i + 1, 5)}: ${option}`);
             }
 
             return new Promise((resolve, reject) => {
