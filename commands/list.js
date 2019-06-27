@@ -5,6 +5,7 @@ const leftPad = require("left-pad");
 const minimist = require("minimist");
 const path = require("path");
 const unique = require('array-unique');
+const settings = require("../utils/settings");
 
 const sourceDir = process.cwd();
 
@@ -19,6 +20,7 @@ module.exports = {
         Promise.all(paths.map(p => dir.promiseFiles(p)))
         .then(fileLists => [].concat.apply([], fileLists))
         .then(files => files.filter(fileName => fileName.match(/\.sln$/)))
+        .then(files => files.filter(file => settings.getExcludedPath().every(exclude => !path.dirname(file).match(exclude))))
         .then(files => files.map(file => path.resolve(file)))
         .then(files => unique(files))
         .then(files => files.sort())
