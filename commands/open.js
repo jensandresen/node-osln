@@ -5,6 +5,7 @@ const leftPad = require("left-pad");
 const minimist = require("minimist");
 const path = require("path");
 const unique = require('array-unique');
+const chalk = require('chalk');
 const settings = require("../utils/settings");
 
 const sourceDir = process.cwd();
@@ -56,7 +57,11 @@ module.exports = {
             console.log("");
 
             for(let i = 0; i < solutionFiles.length; i++) {
-                const option = path.relative(process.cwd(), solutionFiles[i]).replace(/^..(\/|\\)/, '');
+                let option = path.relative(process.cwd(), solutionFiles[i]).replace(/^..(\/|\\)/, '');
+                if (!commandArgs.p && !commandArgs.plain) {
+                    const filename = path.basename(option);
+                    option = option.replace(filename, chalk.bold.green(filename));
+                }
                 console.log(`${leftPad(i + 1, 5)}: ${option}`);
             }
 
@@ -109,6 +114,11 @@ module.exports = {
                 {
                     long: "dry-run",
                     description: "Will not actually open the file, only print which would be opened."
+                },
+                {
+                    short: "p",
+                    long: "plain",
+                    description: "Remove color from the Solution.sln filename"
                 }
             ]
         };
